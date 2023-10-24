@@ -1,1 +1,1 @@
-# hse-investify-bot-
+# investify-bot 🔔
