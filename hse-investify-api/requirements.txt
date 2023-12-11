@@ -1,0 +1,10 @@
+fastapi~=0.104.1
+uvicorn[standard]
+sqlalchemy~=2.0.23
+dotenv
+psycopg2
+requests
+beautifulsoup4
+
+pydantic~=2.5.2
+python-dotenv~=1.0.0
