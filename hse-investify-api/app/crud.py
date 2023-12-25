@@ -17,10 +17,10 @@ def get_active_notifications(db):
 
 def update_notification(db, notification):
     logging.info("db update notification")
-    notification = db.query(Notification).filter(Notification.id == notification.id).first()
-    notification.ticker = notification.ticker
-    notification.indicator_name = notification.indicator_name
-    notification.expected_indicator_value = notification.expected_indicator_value
+    updated_notification = db.query(Notification).filter(Notification.id == notification.id).first()
+    updated_notification.ticker = notification.ticker
+    updated_notification.indicator_name = notification.indicator_name
+    updated_notification.expected_indicator_value = notification.expected_indicator_value
     db.commit()
 
 def delete_notifications(db):

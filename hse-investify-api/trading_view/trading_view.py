@@ -40,3 +40,16 @@ def get_info_url(ticker):
     json = requests.get(SEARCH_URL_PREFIX + ticker).json()
     symbol = json["symbols"][0]
     return INFO_URL_PREFIX + symbol["exchange"] + ":" + symbol["symbol"]
+
+def get_search(ticker):
+    json = requests.get(SEARCH_URL_PREFIX + ticker).json()
+    symbol = json["symbols"][0]
+    json = requests.get(get_info_url(ticker)).json()
+    price = json["close"]
+    return {
+        "ticker": symbol["symbol"],
+        "name": symbol["description"],
+        "price": price,
+        "currency": symbol["currency_code"],
+        "exchange": symbol["exchange"]
+    }
