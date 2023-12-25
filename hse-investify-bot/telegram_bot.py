@@ -42,17 +42,13 @@ def get_tech_indicators(call):
 
 
 def get_info_by_ticker(ticker):
-    # menu = set_menu_keyboard(options)
-    # try:
-    #     #info = get_info_by_ticker(ticker.text)
-    #     text = ticker.text + '\n'
-    #     for i in info:
-    #         text += i + ' = '
-    #         text += str(info[i]) + '\n'
-    #     tb.send_message(ticker.chat.id, text, reply_markup=menu)
-    # except Exception as e:
-    #     tb.send_message(ticker.chat.id, "Ошибка")
-    return
+    chat_id = ticker.chat.id
+    resp = requests.get(start_url + ticker.text).json()
+    s = f"*{ticker.text.upper()}*:\n\n"
+    for i in indicators:
+        s += f"-{i}: {resp[i]}\n\n"
+    menu = set_menu_keyboard(options)
+    tb.send_message(chat_id, s, reply_markup=menu, parse_mode='Markdown')
 
 
 @tb.callback_query_handler(func=lambda call: call.data[:4] == "make" or call.data == "info")
