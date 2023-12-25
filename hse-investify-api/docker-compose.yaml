@@ -10,9 +10,6 @@ services:
       - "8000:8000"
     depends_on:
       - db
-    command: [ "./wait-for-it.sh", "db:5432", "--", "python", "main.py" ]
-    volumes:
-      - main.log:main.log
 
   db:
     image: postgres
@@ -24,5 +21,4 @@ services:
       - data:/var/lib/postgresql/data
 
 volumes:
-  main.log:
   data:
