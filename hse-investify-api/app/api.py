@@ -74,6 +74,6 @@ def get_indicators():
     logging.info("api get indicators")
     return trading_view.AVAILABLE_INDICATORS
 
-@api.get("/information/{ticker}", response_model=[schemas.InformationGet])
+@api.get("/information/{ticker}", response_model=schemas.InformationGet)
 def get_information(ticker: str):
     return trading_view.get_search(ticker)
