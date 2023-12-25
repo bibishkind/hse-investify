@@ -66,7 +66,7 @@ def delete_notifications(active: bool | None):
     if active:
         crud.delete_active_notifications(db)
     else:
-        crud.get_active_notifications(db)
+        crud.delete_notifications(db)
 
 
 @api.delete("/notifications/{id}")
