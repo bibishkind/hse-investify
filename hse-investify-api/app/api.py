@@ -9,7 +9,6 @@ from .db import db
 
 api = FastAPI()
 
-
 @api.post("/notifications")
 def post_notifications(notifications_post: schemas.NotificationsPost):
     logging.info("api post notifications")
@@ -24,7 +23,6 @@ def post_notifications(notifications_post: schemas.NotificationsPost):
         notifications_post.indicator_name]
     notification.expected_indicator_value = notifications_post.expected_indicator_value
     crud.add_notification(db, notification)
-
 
 @api.get("/notifications", response_model=list[schemas.NotificationsGet])
 def get_notifications(active: bool | None):
@@ -43,7 +41,6 @@ def get_notifications(active: bool | None):
     else:
         return crud.get_notifications(db)
 
-
 @api.put("/notifications/{id}")
 def put_notifications(id: int, notifications_put: schemas.NotificationsPut):
     logging.info("api put notifications")
@@ -59,23 +56,24 @@ def put_notifications(id: int, notifications_put: schemas.NotificationsPut):
     notification.expected_indicator_value = notifications_put.expected_indicator_value
     crud.update_notification(db, notification)
 
-
 @api.delete("/notifications")
 def delete_notifications(active: bool | None):
     logging.info("api delete notifications")
     if active:
         crud.delete_active_notifications(db)
     else:
-        crud.delete_notifications(db)
-
+        crud.get_active_notifications(db)
 
 @api.delete("/notifications/{id}")
 def delete_notifications(id: int):
     logging.info("api delete notifications")
     crud.delete_notification(db, id)
 
-
 @api.get("/indicators", response_model=list[str])
 def get_indicators():
     logging.info("api get indicators")
     return trading_view.AVAILABLE_INDICATORS
+
+@api.get("/information/{ticker}", response_model=[schemas.InformationGet])
+def get_information(ticker: str):
+    return trading_view.get_search(ticker)
