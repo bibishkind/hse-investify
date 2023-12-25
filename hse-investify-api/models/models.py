@@ -1,11 +1,13 @@
+# models.py
+from sqlalchemy import MetaData, Column, Integer, String, Float, Boolean
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String, Float, Boolean
 
+metadata = MetaData()
 Base = declarative_base()
-
 
 class Notification(Base):
     __tablename__ = "notifications"
+    metadata = metadata
     id = Column(Integer, primary_key=True)
     chat_id = Column(Integer, nullable=False)
     ticker = Column(String, nullable=False)

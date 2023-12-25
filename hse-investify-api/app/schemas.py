@@ -1,23 +1,21 @@
+# schemas.py
 from pydantic import BaseModel
 
-
-class NotificationAdd(BaseModel):
+class NotificationsPost(BaseModel):
     chat_id: int
     ticker: str
     indicator_name: str
     expected_indicator_value: float
 
-
-class NotificationGet(BaseModel):
+class NotificationsGet(BaseModel):
     id: int
     chat_id: int
     ticker: str
     indicator_name: str
-    # current_indicator_value: float
     expected_indicator_value: float
+    active: bool
 
-
-class NotificationUpdate(BaseModel):
+class NotificationsPut(BaseModel):
     ticker: str
     indicator_name: str
     expected_indicator_value: float
